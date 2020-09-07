@@ -17,8 +17,20 @@ const inactiveThirdStage = () => {
     console.log("User has been inactive for the past 5-6 minutes");
 }
 
-
+var counter = 0;
 // this is the main method that acts like a worker and runs every 1 minute
-setInterval(function(){
+setInterval(function () {
     // please write your code here
-}, 1000);
+
+    let timeInMins = Math.round((new Date().getTime() - user.lastActivity) / 1000 / 60);
+    timeInMins %= 6;
+
+    if (timeInMins <= 2)
+        inactiveFirstStage();
+    else if (timeInMins <= 4)
+        inactiveSecondStage();
+    else if (timeInMins <= 6)
+        inactiveThirdStage();
+
+
+}, 60000);
